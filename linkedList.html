@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script>
+function LinkedList() {
+	var Node = function(element) {
+		this.element = element;
+		this.next = null;
+	};
+	
+	var length = 0,
+		head = null;
+	
+	this.append = function(element) {
+		var node = new Node(element),
+			current;
+		
+		if (head == null) {
+			head = node;
+		} else {
+			current = head;
+			
+			while (current.next) {
+				current = current.next;
+			}
+			current.next = node;
+		}
+		length++;
+	};
+	
+	this.removeAt = function(position){
+		if (position > -1 && position < length) {
+			var current = head,
+				previous,
+				index = 0;
+			
+			if (position == 0) {
+				head = current.next;
+			} else {
+				while (index++ < position) {
+					previous = current;
+					current = current.next;
+				}
+				
+				previous.next = current.next;
+			}
+			
+			length--;
+			return current.element;
+		} else {
+			return null;
+		}
+	};
+	
+	this.insert = function(position, element) {
+		var node = new Node(element),
+			current = head,
+			previous,
+			index = 0;
+		
+		if (position > -1 && position < length) {
+			if (position == 0) {
+				node.next = current;
+				head = node;
+			} else {
+				while (index++ < position) {
+					previous = current;
+					current = current.next;
+				}
+				node.next = current;
+				previous.next = node;
+			}
+
+			length++;
+			return true;
+		} else {
+			return false;		
+		}
+	};
+
+	this.toString = function() {
+		var current = head,
+			string = '';
+
+		while(current) {
+			string += current.element + " ";
+			current = current.next;
+		}
+
+		return string;
+	};
+
+	this.indexOf = function(element) {
+		var current = head,
+			index = -1;
+		while (current) {
+			index++;
+			if (current.element == element) {
+				return index;
+			}
+			current = current.next;
+		}
+
+		return -1;
+	};
+}
+var linkedList = new LinkedList();
+linkedList.append("apple");
+linkedList.append("peach");
+linkedList.insert(1, "orange");
+var string = linkedList.toString();
+document.write(string);
+</script>
+</body>
+</html>

@@ -1,1 +1,1 @@
-jasonCallback({"status":1});
+jsonCallback({"status":1});
